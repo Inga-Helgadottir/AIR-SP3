@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,36 +14,53 @@ public class Main {
         FileWriter writer = null;
         String input = "";
         System.out.println("Enter team name or q to quit");
-        boolean doneAdding = false;
-        while(doneAdding == false){
+        while(!input.toUpperCase().equals("Q")){
             Scanner scan = new Scanner(System.in);
             input = scan.nextLine();
 
-            if(input.toUpperCase().equals("Q")) {
-                break;
-            }else if(input.toUpperCase().equals("")){
+            if(input.toUpperCase().equals("Q")){
+
+            }else if(input.equals("")){
                 System.out.println("Enter team name or q to quit");
             }else{
                 System.out.println("Enter team name or q to quit");
                 saveData(input);
             }
         }
-        System.out.println("Thanks the team name has been saved");
+        System.out.println("Thanks the team names has been saved");
     }
 
     public static void readData(){}
+//    File file = new File("append.txt");
+//    FileWriter fr = new FileWriter(file, true);
+//    BufferedWriter br = new BufferedWriter(fr);
+//br.write("data");
+//
+//br.close();
+//fr.close();
 
     public static void saveData(String input){
-        FileWriter writer = null;
+//        FileWriter writer = null;
+        FileWriter fr = null;
+//        BufferedWriter br;
         try {
-            writer = new FileWriter("data.txt");
-//            writer.write(getGameDataFromSession());
+//            writer = new FileWriter("data.txt");
+//            fr = new FileWriter(String.valueOf(writer), true);
+//            br = new BufferedWriter(fr);
+//            br.write(input);
+//            writer.write(input);
+            File file = new File("Data.txt");
+            fr = new FileWriter(file, true);
+            fr.write(input);
+
         } catch (IOException e) {
             System.out.println("Couldn't instantiate the FileWriter in saveGameData()");
             e.printStackTrace();
         } finally {
             try {
-                writer.close();
+//                writer.close();
+                fr.close();
+//                br.close();
             } catch (NullPointerException | IOException e) {
                 System.out.println("Couldn't close the FileWriter in saveGameData()");
                 e.printStackTrace();
