@@ -19,7 +19,7 @@ public class Main {
             Scanner tournamentDataScanner = new Scanner(tournamentDataFile);
             readTournamentData();
 
-            //System.out.println(tournaments.get(0));
+            System.out.println(tournaments.get(0).getSport());
 
             tournamentDataScanner.close();
         } catch (FileNotFoundException e) {
@@ -47,32 +47,26 @@ public class Main {
 
         while(scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            tournamentLine = line.split(".");
+            tournamentLine = line.split(",");
 
-            System.out.println("Here");
-            String name = tournamentLine[0];
+            //System.out.println(tournamentLine[0]);
+            String name = tournamentLine[1];
             System.out.println("Here2");
             // teams
-            String sport = tournamentLine[1];
-            String tournamentMode = tournamentLine[2];
-            String signUpDeadline = tournamentLine[3];
+            String sport = tournamentLine[3];
+            String tournamentMode = tournamentLine[5];
+            //String signUpDeadline = tournamentLine[3];
 
-            tournaments.add(new Tournament(name, sport, tournamentMode, signUpDeadline));
+            tournaments.add(new Tournament(name, sport, tournamentMode));
 
         }
 
         /*
-        * private static void loadFile() {
-        ArrayList<String> strings = new ArrayList<>();
-        File loadFile = new File("C:\\Users\\ablar\\OneDrive\\Dokumenter\\SP3\\AIR-SP3\\src\\com\\company\\config.csv");
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(loadFile);
-            scanner.useDelimiter(",");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-*/
+        while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            accountLine = line.split(":");
+            new Player(accountLine[0], Integer.parseInt(accountLine[1]));
+        }*/
 
     }
 
@@ -130,7 +124,7 @@ public class Main {
         String mode = ui.getUserInput("Tournament mode (knock-out or group):");
         String signUpDeadline = ui.getUserInput("Signup deadline (d/m/yy h:mm):");
 
-        Tournament tournament = new Tournament(name, sport, mode, signUpDeadline);
+        Tournament tournament = new Tournament(name, sport, mode);
         tournaments.add(tournament);
         ui.displayMsg("\nNew tournament has been registered!");
 
