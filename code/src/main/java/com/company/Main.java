@@ -26,7 +26,13 @@ public class Main {
             Scanner tournamentDataScanner = new Scanner(tournamentDataFile);
             readTournamentData();
 
+            //delete later ---------------------------------------------------------------------------------------------
+            System.out.println("Testing values");
+            System.out.println(tournaments.get(0).getName());
             System.out.println(tournaments.get(0).getSport());
+            System.out.println(tournaments.get(0).toString());
+            System.out.println(tournaments.get(1).toString());
+            System.out.println("end of testing\n");
 
             tournamentDataScanner.close();
         } catch (FileNotFoundException e) {
@@ -57,14 +63,13 @@ public class Main {
             tournamentLine = line.split(",");
 
             String name = tournamentLine[1];
-            System.out.println("Here2");
+
             // teams
             String sport = tournamentLine[3];
             String tournamentMode = tournamentLine[5];
             //String signUpDeadline = tournamentLine[3];
 
             tournaments.add(new Tournament(name, sport, tournamentMode));
-
         }
 
         /*
@@ -94,7 +99,7 @@ public class Main {
         String tournamentDataAsString = "";
 
         for (Tournament tournament : tournaments) {
-            tournamentDataAsString+=tournament.toString();
+            tournamentDataAsString += tournament.toString();
         }
 
         return tournamentDataAsString;
