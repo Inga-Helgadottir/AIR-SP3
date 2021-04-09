@@ -12,11 +12,11 @@ public class Tournament {
    private LocalDateTime signUpDeadline;
    //private ArrayList<LocalDateTime> dateAndTimes;
 
-   public Tournament(String name, String sport, String tournamentMode, String signUpDeadline) {
+   public Tournament(String name, String sport, String tournamentMode) {
       this.name = name;
       this.sport = sport;
       this.tournamentMode = tournamentMode;
-      this.signUpDeadline = LocalDateTime.parse(signUpDeadline, myDateTimeFormat);
+      //this.signUpDeadline = LocalDateTime.parse(signUpDeadline, myDateTimeFormat);
    }
 
    public String getName() {
@@ -67,11 +67,11 @@ public class Tournament {
    @Override
    public String toString(){
       return
-         "Name." + this.name +
-         //",teams:" + this.teams.toString() +
-         " Sport." + this.sport +
-         " Tournament mode." + this.tournamentMode +
-         " SignUp deadline." + this.signUpDeadline +
+         "Name," + this.name + "," +
+         //",teams:" + this.teams.toString() + "," +
+         " Sport," + this.sport + "," +
+         " Tournament mode," + this.tournamentMode + "," +
+         " SignUp deadline," + this.signUpDeadline +
          "\n";
    }
 
