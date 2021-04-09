@@ -12,24 +12,11 @@ public class Team {
    private int opposingTeamsGoals = 0;
 
    public Team(String name) {
-      this.name = name;
+       this.name = name;
    }
 
    public void addPlayer(String playerName){
       players.add(playerName);
-   }
-
-   @Override
-   public String toString() {
-      return "Team{" +
-              "id=" + id +
-              ", name='" + name + '\'' +
-              ", players=" + players +
-              ", stillInTournament=" + stillInTournament +
-              ", point=" + point +
-              ", goalsMade=" + goalsMade +
-              ", opposingTeamsGoals=" + opposingTeamsGoals +
-              '}';
    }
 
    public String getName() {
@@ -44,15 +31,24 @@ public class Team {
       return opposingTeamsGoals;
    }
 
-   public void setPoint(int point) {
-      this.point = point;
-   }
-
    public void setGoalsMade() {
-      this.goalsMade++;
+      this.goalsMade ++;
    }
 
    public void setOpposingTeamsGoals() {
-      this.opposingTeamsGoals++;
+      this.opposingTeamsGoals ++;
+   }
+
+   @Override
+   public String toString() {
+      return "Team{" +
+              "id=" + id +
+              ", name='" + name + '\'' +
+              ", players=" + players +
+              ", stillInTournament=" + stillInTournament +
+              ", point=" + point +
+              ", goalsMade=" + goalsMade +
+              ", opposingTeamsGoals=" + opposingTeamsGoals +
+              '}';
    }
 }
