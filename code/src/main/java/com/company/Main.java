@@ -15,12 +15,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException{
         /*testing*/
-            Team t1 = new Team("aaaaa");
-            Team t2 = new Team("sssss");
+            Team t1 = new Team("hoho");
+            Team t2 = new Team("ohoh");
             Team[] teams = {t1, t2};
             Match match = new Match(teams);
             match.setTeam1Goals(12);
-            match.setTeam2Goals(7);
+            match.setTeam2Goals(13);
             match.whoWon();
         /*test ends*/
         try {
