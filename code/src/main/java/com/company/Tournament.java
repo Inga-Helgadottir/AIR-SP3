@@ -68,7 +68,7 @@ public class Tournament {
    public String toString(){
       return
               "Name," + this.name + "," +
-                      //",teams:" + this.teams.toString() + "," +
+                      ",teams:" + getTeams() + "," +
                       " Sport," + this.sport + "," +
                       " Tournament mode," + this.tournamentMode + "," +
                       " SignUp deadline," + this.signUpDeadline +
