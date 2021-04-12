@@ -15,4 +15,11 @@ public class UI {
 
       return input;
    }
+
+   public int getTeamInput(){
+
+      int inp = scanner.nextInt();
+
+      return inp;
+   }
 }

@@ -158,4 +158,17 @@ public class Main {
 
         saveData("src/tournamentData.txt", getTournamentData());
     }
+
+    /*public static void registerNewTeam(){
+        ui.displayMsg("\nRegister new team");
+        String name = ui.getUserInput("\n team name:");
+        String id = ui.getUserInput("\n team id:");
+        int inp = ui.getTeamInput();
+        Team team = new Team(name);//inp
+
+        teams.add(team);
+        ui.displayMsg("\nNew team has been registered!");
+        System.out.println(teams);
+        //saveData("src/tournamentData.txt", getTournamentData());
+    }*/
 }
