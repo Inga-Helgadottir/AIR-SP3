@@ -10,6 +10,7 @@ public class Match {
     Date gameDate;
     int team1Goals;
     int team2Goals;
+    String winner;
 
     public Match(Team[] teams) {//add later: gameDate
         this.teams = teams;
@@ -18,10 +19,13 @@ public class Match {
     public void whoWon() {
         if(team1Goals > team2Goals){
             System.out.println(teams[0].getName() + " won");
+            this.winner = teams[0].getName();
         }else if(team1Goals < team2Goals){
             System.out.println(teams[1].getName() + " won");
+            this.winner = teams[1].getName();
         }else if(team1Goals == team2Goals){
             System.out.println("It was a tie");
+            this.winner = "tie";
         }
         updateGoalsMade();
     }
@@ -39,7 +43,7 @@ public class Match {
         try{
             File file = new File("src/matchData.txt");
             FileWriter fr = new FileWriter(file, true);
-            String data = teams[0].getName() + ", goals: " + team1Goals + " vs. " + teams[1].getName() + ", goals: " + team1Goals + "\n";
+            String data = teams[0].getName() + ", goals: " + team1Goals + " vs. " + teams[1].getName() + ", goals: " + team2Goals + ", Winner: " + this.winner + "\n";
             fr.write(data);
             fr.close();
             Main.printTounamentData(file);
