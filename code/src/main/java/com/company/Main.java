@@ -14,15 +14,15 @@ public class Main {
     static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
 
     public static void main(String[] args) throws IOException{
-        /*testing
-            Team t1 = new Team("hoho");
-            Team t2 = new Team("lolo");
+        /*testing*/
+            Team t1 = new Team("aaaaa");
+            Team t2 = new Team("sssss");
             Team[] teams = {t1, t2};
             Match match = new Match(teams);
-            match.setTeam1Goals(11);
-            match.setTeam2Goals(10);
+            match.setTeam1Goals(12);
+            match.setTeam2Goals(7);
             match.whoWon();
-        test ends*/
+        /*test ends*/
         try {
             File tournamentDataFile = new File("src/tournamentData.txt");
             Scanner tournamentDataScanner = new Scanner(tournamentDataFile);
