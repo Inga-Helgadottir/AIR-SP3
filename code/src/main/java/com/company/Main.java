@@ -14,7 +14,7 @@ public class Main {
     static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
 
     public static void main(String[] args) throws IOException{
-        /*testing*/
+        /*testing
             Team t1 = new Team("hoho");
             Team t2 = new Team("ohoh");
             Team[] teams = {t1, t2};
@@ -22,7 +22,7 @@ public class Main {
             match.setTeam1Goals(12);
             match.setTeam2Goals(13);
             match.whoWon();
-        /*test ends*/
+        test ends*/
         try {
             File tournamentDataFile = new File("src/tournamentData.txt");
             Scanner tournamentDataScanner = new Scanner(tournamentDataFile);
@@ -87,7 +87,6 @@ public class Main {
             //String signUpDeadline = tournamentLine[3];
 
             tournaments.add(new Tournament(name, sport, tournamentMode));
-            //printTounamentData(file);//--------------------------------------------------------------------------
         }
 
         /*
