@@ -7,41 +7,52 @@ public class Match {
     Date gameDate;
     int team1Goals;
     int team2Goals;
-    boolean gameOver = false;
 
     public Match(Team[] teams) {//add later: gameDate
         this.teams = teams;
     }
-    /* testing match
-        public void testing(){
-            for (int i = 0; i < teams.length-1; i++) {
-                System.out.println(teams[i].toString());
-            }
-    }*/
 
     public void giveWinnerTeamPoints() {
-        if(gameOver){
-            if(team1Goals < team2Goals){
-                System.out.println(teams[0] + " won");
-                updateGoalsMade(teams[0]);
-            }else if(team1Goals > team2Goals){
-                System.out.println(teams[1] + " won");
-                updateGoalsMade(teams[1]);
-            }else if(team1Goals == team2Goals){
-                System.out.println("It was a tie");
-                updateGoalsMade(teams[0]);
-                updateGoalsMade(teams[1]);
-            }
+        if(team1Goals < team2Goals){
+            System.out.println(teams[0].getName() + " won");
+        }else if(team1Goals > team2Goals){
+            System.out.println(teams[1].getName() + " won");
+        }else if(team1Goals == team2Goals){
+            System.out.println("It was a tie");
         }
+        updateGoalsMade();
     }
 
-    public void updateGoalsMade(Team team){
-        team.setGoalsMade();
-        String goalBy = team.getName();
-        if(goalBy != teams[0].getName()){
-            teams[0].setOpposingTeamsGoals();
-        }else{
-            teams[1].setOpposingTeamsGoals();
-        }
+    public void updateGoalsMade(){
+        teams[0].setGoalsMade(team1Goals);
+        teams[1].setGoalsMade(team2Goals);
+    }
+
+    public Team[] getTeams() {
+        return teams;
+    }
+
+    public Date getGameDate() {
+        return gameDate;
+    }
+
+    public void setGameDate(Date gameDate) {
+        this.gameDate = gameDate;
+    }
+
+    public int getTeam1Goals() {
+        return team1Goals;
+    }
+
+    public void setTeam1Goals(int team1Goals) {
+        this.team1Goals = team1Goals;
+    }
+
+    public int getTeam2Goals() {
+        return team2Goals;
+    }
+
+    public void setTeam2Goals(int team2Goals) {
+        this.team2Goals = team2Goals;
     }
 }
