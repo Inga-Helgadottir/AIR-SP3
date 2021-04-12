@@ -31,12 +31,13 @@ public class Team {
       return opposingTeamsGoals;
    }
 
-   public void setGoalsMade() {
-      this.goalsMade ++;
+   public void setGoalsMade(int goals) {
+
+      this.goalsMade += goals;
    }
 
-   public void setOpposingTeamsGoals() {
-      this.opposingTeamsGoals ++;
+   public void setOpposingTeamsGoals(int goals) {
+      this.opposingTeamsGoals += goals;
    }
 
    @Override
