@@ -14,18 +14,28 @@ public class Main {
     static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
 
     public static void main(String[] args) throws IOException{
+        /*testing
+            Team t1 = new Team("hoho");
+            Team t2 = new Team("lolo");
+            Team[] teams = {t1, t2};
+            Match match = new Match(teams);
+            match.setTeam1Goals(11);
+            match.setTeam2Goals(10);
+            match.whoWon();
+        test ends*/
         try {
             File tournamentDataFile = new File("src/tournamentData.txt");
             Scanner tournamentDataScanner = new Scanner(tournamentDataFile);
             readTournamentData();
 
-            //delete later ---------------------------------------------------------------------------------------------
-            System.out.println("Testing values");
-            System.out.println(tournaments.get(0).getName());
-            System.out.println(tournaments.get(0).getSport());
-            System.out.println(tournaments.get(0).toString());
-            System.out.println(tournaments.get(1).toString());
-            System.out.println("end of testing\n");
+            /*testing
+                System.out.println("Testing values");
+                System.out.println(tournaments.get(0).getName());
+                System.out.println(tournaments.get(0).getSport());
+                System.out.println(tournaments.get(0).toString());
+                System.out.println(tournaments.get(1).toString());
+                System.out.println("end of testing\n");
+             test ends*/
 
             tournamentDataScanner.close();
         } catch (FileNotFoundException e) {
@@ -46,6 +56,20 @@ public class Main {
         }
     }
 
+    public static void printTounamentData(File file){
+        Scanner input = null;
+        try {
+            input = new Scanner(file);
+
+            while (input.hasNextLine())
+            {
+                System.out.println(input.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void readTournamentData() throws IOException{
         String[] tournamentLine;
         File file = new File("src/tournamentData.txt");
@@ -63,6 +87,7 @@ public class Main {
             //String signUpDeadline = tournamentLine[3];
 
             tournaments.add(new Tournament(name, sport, tournamentMode));
+            //printTounamentData(file);//--------------------------------------------------------------------------
         }
 
         /*
