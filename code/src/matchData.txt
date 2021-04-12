@@ -1,2 +1,2 @@
-hihi, goals: 5 vs. haha, goals: 5
-hoho, goals: 11 vs. lolo, goals: 11
+hihi, goals: 2 vs. haha, goals: 5, Winner: haha
+aaaaa, goals: 12 vs. sssss, goals: 7, Winner: aaaaa
