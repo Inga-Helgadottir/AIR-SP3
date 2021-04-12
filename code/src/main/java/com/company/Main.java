@@ -14,13 +14,6 @@ public class Main {
     static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
 
     public static void main(String[] args) throws IOException{
-        /* testing Match
-            Team t1 = new Team("hihi");
-            Team t2 = new Team("haha");
-            Team[] teams = {t1, t2};
-            Match match1 = new Match(teams);
-            match1.testing();
-         */
         try {
             File tournamentDataFile = new File("src/tournamentData.txt");
             Scanner tournamentDataScanner = new Scanner(tournamentDataFile);
