@@ -12,10 +12,10 @@ public class Match {
         this.teams = teams;
     }
 
-    public void giveWinnerTeamPoints() {
-        if(team1Goals < team2Goals){
+    public void whoWon() {
+        if(team1Goals > team2Goals){
             System.out.println(teams[0].getName() + " won");
-        }else if(team1Goals > team2Goals){
+        }else if(team1Goals < team2Goals){
             System.out.println(teams[1].getName() + " won");
         }else if(team1Goals == team2Goals){
             System.out.println("It was a tie");
@@ -26,6 +26,8 @@ public class Match {
     public void updateGoalsMade(){
         teams[0].setGoalsMade(team1Goals);
         teams[1].setGoalsMade(team2Goals);
+        teams[0].setOpposingTeamsGoals(team2Goals);
+        teams[1].setOpposingTeamsGoals(team1Goals);
     }
 
     public Team[] getTeams() {
