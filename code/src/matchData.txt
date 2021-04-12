@@ -1,2 +1,2 @@
-hihi, goals: 2 vs. haha, goals: 5, Winner: haha
-aaaaa, goals: 12 vs. sssss, goals: 7, Winner: aaaaa
+team1, hihi, team1goals, 2, team2, haha, team2goals, 5, Winner, haha,
+team1, hoho, team1goals, 12, team2, ohoh, team2goals, 13, Winner, ohoh,
