@@ -1,2 +1,3 @@
-Name,t1,Sport,dskfjdk,Tournament mode,kdfjk,
-Name,t2,Sport,dsjfkdh,Tournament mode,dkjfkj,
+Name,t1, teams:null, Sport,dskfjdk, Tournament mode,kdfjk, SignUp deadline,null
+Name,t2, teams:null, Sport,dsjfkdh, Tournament mode,dkjfkj, SignUp deadline,null
+Name,t3, teams:null, Sport,smtn, Tournament mode,knock-out, SignUp deadline,null
