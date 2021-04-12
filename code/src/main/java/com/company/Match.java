@@ -1,5 +1,8 @@
 package com.company;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 
 public class Match {
@@ -28,6 +31,21 @@ public class Match {
         teams[1].setGoalsMade(team2Goals);
         teams[0].setOpposingTeamsGoals(team2Goals);
         teams[1].setOpposingTeamsGoals(team1Goals);
+        updateGoalsFile();
+    }
+
+    public void updateGoalsFile(){
+        String fileData = "";
+        try{
+            File file = new File("src/matchData.txt");
+            FileWriter fr = new FileWriter(file, true);
+            String data = teams[0].getName() + ", goals: " + team1Goals + " vs. " + teams[1].getName() + ", goals: " + team1Goals + "\n";
+            fr.write(data);
+            fr.close();
+            Main.printTounamentData(file);
+        }catch (IOException e){
+            System.out.println(e.getCause());
+        }
     }
 
     public Team[] getTeams() {
