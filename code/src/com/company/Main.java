@@ -42,6 +42,8 @@ public class Main {
             System.out.println("end of testing\n");
          test ends*/
 
+        tournaments.get(1).displayTeamRankings();
+
         ui.displayMsg("~ Tournament Manager ~");
 
         showStartMenu();
