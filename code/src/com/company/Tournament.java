@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class Tournament {
    final static UI ui = new UI();
@@ -106,6 +105,7 @@ public class Tournament {
 
    public void addTeam(Team team){
       teams.add(team);
+      randomTeamsToMatch();
    }
 
 // ***************** Getter and Setter-ish END *******************
@@ -336,6 +336,48 @@ public class Tournament {
 
 // ******************** Static methods END ***********************
 
+   public void randomTeamsToMatch(){
+      int amountOfTeams = teams.size();
+      ArrayList<Integer> randDone = new ArrayList<>();
+      if(amountOfTeams < 2) {
+         System.out.println("You need at least 2 teams to start a match");
+      }else if(amountOfTeams % 2 != 0){
+         System.out.println("You have an uneven number of teams");
+      }else if(amountOfTeams == 2){
+         Team[] matchTeams = {teams.get(0), teams.get(1)};
+         Match m = new Match(matchTeams);//-----------------------------------------------------
+      }else{
+         Random rand = new Random();
+         while(randDone.size() < amountOfTeams){
+            int r1 = rand.nextInt(amountOfTeams - 0) + 0;
+            int r2 = rand.nextInt(amountOfTeams - 0) + 0;
+            boolean result = randDone.contains(r1);
+            boolean result2 = randDone.contains(r2);
+            if(result == false && result2 == false && r2 != r1){
+               randDone.add(r1);
+               randDone.add(r2);
+               Team[] matchTeams = {teams.get(r1), teams.get(r2)};
+               Match m = new Match(matchTeams);//-----------------------------------------------------
+               saveMatchesToFile(m);
+            }
+         }
+      }
+   }
+
+   public void saveMatchesToFile(Match data){
+      try{
+         File file = new File("src/data/matches.txt");
+         System.out.println(file);
+         FileWriter fr = new FileWriter(file, true);
+         String myData = data.toString() + "\n";
+         fr.write(myData);
+         fr.close();
+         Main.printTournamentData(file);
+      }catch (IOException e){
+         System.out.println(e.getCause());
+      }
+
+   }
 
    @Override
    public String toString(){

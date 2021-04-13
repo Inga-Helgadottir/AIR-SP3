@@ -7,7 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
     final static UI ui = new UI();

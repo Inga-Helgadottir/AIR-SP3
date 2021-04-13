@@ -1,0 +1,2 @@
+ID,4,Name,hihihi,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,5,Name,Hehehe,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
