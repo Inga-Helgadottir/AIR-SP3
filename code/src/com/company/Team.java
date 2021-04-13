@@ -21,13 +21,8 @@ public class Team {
    }
 
    // For tournaments created from data
-   public Team(int id, String name, boolean stillInTournament, int point, int goalsMade, int opposingTeamsGoals) {
-      this.id = id;
+   public Team(int id, String name) {
       this.name = name;
-      this.stillInTournament = stillInTournament;
-      this.point = point;
-      this.goalsMade = goalsMade;
-      this.opposingTeamsGoals = opposingTeamsGoals;
    }
 
 
@@ -39,9 +34,8 @@ public class Team {
       idCounter = idCounterFromData;
    }
 
-
-   public int getPoint(){
-      return this.point;
+   public void addPlayer(String playerName){
+      players.add(playerName);
    }
 
    public String getName() {
@@ -62,10 +56,6 @@ public class Team {
 
    public void setOpposingTeamsGoals(int goals) {
       this.opposingTeamsGoals += goals;
-   }
-
-   public void addPlayer(String playerName){
-      players.add(playerName);
    }
 
    public void joinTournament(Tournament tournamentToJoin){
