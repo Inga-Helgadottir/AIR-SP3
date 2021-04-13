@@ -1,1 +1,0 @@
-ID,8,Name,Super Cup,Sport,Football,Tournament mode,knock-out,SignUp deadline,12-12-12 12:12
