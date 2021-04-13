@@ -53,6 +53,7 @@ class UI{
 }
 
 Main "1" *-- "1" UI
+Main "1" o-- "many" Tournament
 Tournament "many" *-- "many" Team
 Tournament "many" *-- "many" Match
 Team "1" *-- "2...*" Player
