@@ -345,7 +345,7 @@ public class Tournament {
          System.out.println("You have an uneven number of teams");
       }else if(amountOfTeams == 2){
          Team[] matchTeams = {teams.get(0), teams.get(1)};
-         Match m = new Match(matchTeams);//-----------------------------------------------------
+         Match m = new Match(matchTeams);
       }else{
          Random rand = new Random();
          while(randDone.size() < amountOfTeams){
@@ -357,7 +357,7 @@ public class Tournament {
                randDone.add(r1);
                randDone.add(r2);
                Team[] matchTeams = {teams.get(r1), teams.get(r2)};
-               Match m = new Match(matchTeams);//-----------------------------------------------------
+               Match m = new Match(matchTeams);
                saveMatchesToFile(m);
             }
          }
