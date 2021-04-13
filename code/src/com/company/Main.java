@@ -1,286 +1,260 @@
 package com.company;
 
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.io.File;
+import java.nio.file.Files;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-   static UI ui = new UI();
-   static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
-   static boolean systemOn = true;
+    final static UI ui = new UI();
 
-   public static void main(String[] args){
-      //Read all id counters and set to corresponding classes
-      Tournament.setIdCounter(readIdCounterData("src/data/idCounters/idCounter_Tournament.txt"));
+    static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
+    static boolean systemOn = true;
 
-      //Read all tournament data
-      readTournamentData("src/data/tournaments");
+    public static void main(String[] args) throws IOException{
+        //Read all id counters and set to corresponding classes
+        Tournament.setIdCounter(readIdCounterData("src/data/idCounters/idCounter_Tournament.txt"));
+        Team.setIdCounter(readIdCounterData("src/data/idCounters/idCounter_Team.txt"));
 
-      ui.displayMsg("~ Tournament Manager ~");
+        //Read all tournament data
+        Tournament.readTournamentData("src/data/tournaments");
 
-      showStartMenu();
-      String taskType = ui.getUserInput("\nUser input:");
-      handleStartMenuChoice(taskType);
+        /*testing
+            Team t1 = new Team("hoho");
+            Team t2 = new Team("ohoh");
+            Team[] teams = {t1, t2};
+            Match match = new Match(teams);
+            match.setTeam1Goals(12);
+            match.setTeam2Goals(13);
+            match.whoWon();
+        test ends*/
 
-      while(systemOn){
-         showStartMenu();
-         taskType = ui.getUserInput("\nUser input:");
-         handleStartMenuChoice(taskType);
-      }
+        /*testing
+            System.out.println("Testing values");
+            System.out.println(tournaments.get(0).getName());
+            System.out.println(tournaments.get(0).getSport());
+            System.out.println(tournaments.get(0).toString());
+            System.out.println(tournaments.get(1).toString());
+            System.out.println("end of testing\n");
+         test ends*/
 
-   }
+        ui.displayMsg("~ Tournament Manager ~");
 
-   public static int readIdCounterData(String filePath){
-      String[] idCounterLine;
-      int idCounter = 0;
+        showStartMenu();
+        String taskType = ui.getUserInput("\nUser input:");
+        handleStartMenuChoice(taskType);
 
-      try{
-         File file = new File(filePath);
-         Scanner scanner = new Scanner(file);
-         String line = scanner.nextLine();
-         idCounterLine = line.split(":");
-         idCounter = Integer.parseInt(idCounterLine[1]);
-      }catch(FileNotFoundException e){
-         System.out.println(e);
-      }
+        while(systemOn){
+            showStartMenu();
+            taskType = ui.getUserInput("\nUser input:");
+            handleStartMenuChoice(taskType);
+        }
+    }
 
-      return idCounter;
-   }
+    public static int readIdCounterData(String filePath){
+        String[] idCounterLine;
+        int idCounter = 0;
 
-   public static void saveIdCounterData(String filePath, String data){
-      String fileData = data;
-
-      try{
-         File file = new File(filePath);
-         FileWriter fileWriter = new FileWriter(file, false);
-         fileWriter.write(data);
-         fileWriter.close();
-      }catch (IOException e){
-         System.out.println(e.getCause());
-      }
-   }
-
-
-   public static void deleteFolder(File file){
-      try{
-         File[] allContents = file.listFiles();
-         if (allContents != null) {
-            for (File content : allContents) {
-               deleteFolder(content);
-            }
-         }
-         Files.delete(file.toPath());
-      }catch(IOException e){
-         System.out.println(e);
-      }
-   }
-
-
-   public static void readTournamentData(String filePath){
-      try{
-         File tournamentsDir = new File(filePath);
-         String tournamentsDirContent[] = tournamentsDir.list();
-
-         for(int i = 0; i<tournamentsDirContent.length; i++) {
-            File tournamentData = new File(filePath + "/" + tournamentsDirContent[i] + "/tournamentData.txt");
-            Scanner scanner = new Scanner(tournamentData);
-            String[] tournamentLine;
-
-            while(scanner.hasNextLine()) {
-               String line = scanner.nextLine();
-               tournamentLine = line.split(",");
-
-               int id = Integer.parseInt(tournamentLine[1]);
-               String name = tournamentLine[3];
-               String sport = tournamentLine[5];
-               String tournamentMode = tournamentLine[7];
-               String signUpDeadline = tournamentLine[9];
-
-               tournaments.add(new Tournament(id, name, sport, tournamentMode, signUpDeadline));
-
-               // Adds dateAndTimes data to the corresponding tournament
-               readTournamentDateAndTimesData(filePath, tournaments.get(i));
-            }
+        try{
+            File file = new File(filePath);
+            Scanner scanner = new Scanner(file);
+            String line = scanner.nextLine();
+            idCounterLine = line.split(":");
+            idCounter = Integer.parseInt(idCounterLine[1]);
             scanner.close();
-         }
-      }catch(IOException e){
-         System.out.println(e);
-      }
+        }catch(FileNotFoundException e){
+            System.out.println(e);
+        }
 
-   }
+        return idCounter;
+    }
 
-   public static void readTournamentDateAndTimesData(String filePath, Tournament tournament){
-      try{
-         File tournamentsDir = new File(filePath);
-         String tournamentsDirContent[] = tournamentsDir.list();
+    public static void saveIdCounterData(String filePath, String data){
+        String fileData = data;
 
-         for(int i=0; i<tournamentsDirContent.length; i++) {
-            File dateAndTimesData = new File(filePath + "/" + tournament.getName() + "/dateAndTime.txt");
-            Scanner scanner = new Scanner(dateAndTimesData);
-            String[] dateAndTimesLines;
+        try{
+            File file = new File(filePath);
+            FileWriter fileWriter = new FileWriter(file, false);
+            fileWriter.write(data);
+            fileWriter.close();
+        }catch (IOException e){
+            System.out.println(e.getCause());
+        }
+    }
 
-            while(scanner.hasNextLine()) {
-               String line = scanner.nextLine();
-               dateAndTimesLines = line.split(",");
-
-               for(String dateAndTimesLine : dateAndTimesLines){
-                  tournament.addDateAndTimes(dateAndTimesLine);
-               }
+    public static void deleteFolder(File file){
+        try{
+            File[] allContents = file.listFiles();
+            if (allContents != null) {
+                for (File content : allContents) {
+                    deleteFolder(content);
+                }
             }
+            Files.delete(file.toPath());
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }
 
-            scanner.close();
-         }
-      }catch(IOException e){
-         System.out.println(e);
-      }
-   }
+    public static void saveData(String filePath, String data){
+        String fileData = data;
 
-   public static void saveTournamentData(String filePath, String fileName, String data){
-      String fileData = data;
+        try{
+            File file = new File(filePath);
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(data);
+            fileWriter.close();
+        }catch (IOException e){
+            System.out.println(e.getCause());
+        }
+    }
 
-      try{
-         createNewDir(filePath, fileName);
+    public static void createNewDir(String filePath, String dirName){
+        File newDir = new File(filePath + "/" + dirName);
+        newDir.mkdir();
+    }
 
-         File file = new File(filePath + "/" + fileName + "/tournamentData.txt");
-         FileWriter fileWriter = new FileWriter(file, false);
-         fileWriter.write(data);
-         fileWriter.close();
-      }catch (IOException e){
-         System.out.println(e.getCause());
-      }
-   }
+    public static void showStartMenu(){
+        ui.displayMsg("\n(START-MENU)");
 
-   public static void createNewDir(String filePath, String dirName){
-      File newDir = new File(filePath + "/" + dirName);
-      newDir.mkdir();
-   }
+        ui.displayMsg("\nWhat would you like to do?");
+        ui.displayMsg("\n- Manage tournaments (Type: 1)");
+        ui.displayMsg("- Register a new team to a tournament (Type: 2)");
+        ui.displayMsg("- See data\n (Type: 3)");
+        ui.displayMsg("- Close system (Type: 4)"); // Change if more menu options are added
+    }
 
+    public static void handleStartMenuChoice(String taskType){
+        if(taskType.equals("1")){
+            showTournamentMenu();
+        }else if(taskType.equals("2")){
+            registerNewTeam();
+        }else if(taskType.equals("3")){
+            System.out.println("See data");
+        }else if(taskType.equals("4")){ // Change if more menu options are added
+            System.out.println("\nThe system has been turned off");
+            systemOn = false;
+        }else{
+            System.out.println("Invalid input");
+        }
+    }
 
-   public static void showStartMenu(){
-      ui.displayMsg("\n(START-MENU)");
+    public static void showTournamentMenu(){
+        ui.displayMsg("\n(TOURNAMENT-MENU)");
 
-      ui.displayMsg("\nWhat would you like to do?");
-      ui.displayMsg("\n- Manage tournaments (Type: 1)");
-      // todo add team-menu
-      // todo add data menu
-      // todo Change the "Close system" type
-      ui.displayMsg("\n- Close system (Type: 10)");
-   }
+        ui.displayMsg("\nWhat would you like to do?");
+        ui.displayMsg("\n- Register new tournament (Type: 1)");
+        ui.displayMsg("- Edit a tournament (Type: 2)");
+        ui.displayMsg("- Delete a tournament (Type: 3)");
+        ui.displayMsg("- Go back to start-menu (Type: 4)");
 
-   public static void handleStartMenuChoice(String taskType){
-      if(taskType.equals("1")){
-         showTournamentMenu();
-      }else if(taskType.equals("10")){
-         System.out.println("\nThe system has been turned off");
-         systemOn = false;
-      }else{
-         System.out.println("Invalid input");
-      }
-   }
+        String taskType = ui.getUserInput("\nUser input:");
+        handleTournamentChoice(taskType);
+    }
 
+    public static void handleTournamentChoice(String taskType){
+        if(taskType.equals("1")){
+           Tournament.registerNewTournament();
+        }else if(taskType.equals("2")){
+            //todo Make tournament editing available
+            ui.displayMsg("Editing option not yet available");
+        }else if(taskType.equals("3")){
+            Tournament.deleteTournament();
+        }else if(taskType.equals("4")){
+            return;
+        }else{
+            ui.displayMsg("Invalid input");
+        }
+    }
 
-   public static void showTournamentMenu(){
-      ui.displayMsg("\n(TOURNAMENT-MENU)");
+    public static void registerNewTeam(){
+        ui.displayMsg("\n(REGISTER NEW TEAM)");
 
-      ui.displayMsg("\nWhat would you like to do?");
-      ui.displayMsg("\n- Register new tournament (Type: 1)");
-      ui.displayMsg("\n- Edit a tournament (Type: 2)");
-      ui.displayMsg("\n- Delete a tournament (Type: 3)");
-      ui.displayMsg("\n- Go back to start-menu (Type: 4)");
+        if(Main.tournaments.size() != 0){
+            ui.displayMsg("\nTournaments currently in the system: ");
+            Tournament.displayAllTournaments();
 
-      String taskType = ui.getUserInput("\nUser input:");
-      handleTournamentChoice(taskType);
-   }
+            String userInput = ui.getUserInput("\nType the ID of the tournament the team would like to register " +
+            "into \nType -1 to cancel: ");
 
-   public static void handleTournamentChoice(String taskType){
-      if(taskType.equals("1")){
-         registerNewTournament();
-      }else if(taskType.equals("2")){
-         //todo Make tournament editing available
-         System.out.println("Editing option not yet available");
-      }else if(taskType.equals("3")){
-         deleteTournament();
-      }else if(taskType.equals("4")){
-         return;
-      }else{
-         System.out.println("Invalid input");
-      }
-   }
+            if(!userInput.equals("-1")){
+                int tournamentId = Integer.parseInt(userInput);
 
-   public static void registerNewTournament(){
-      ui.displayMsg("\n(REGISTER NEW TOURNAMENT)");
+                Tournament tournamentToRegisterInto = Tournament.findTournament(tournamentId);
 
-      String name = ui.getUserInput("\nTournament name:");
-      String sport = ui.getUserInput("Sport:");
-      String mode = ui.getUserInput("Tournament mode (knock-out or group):");
-      String signUpDeadline = ui.getUserInput("Signup deadline (dd-MM-yy HH:mm):");
+                if(tournamentToRegisterInto != null){
+                    String teamName = ui.getUserInput("\nTeam name:");
 
-      Tournament tournament = new Tournament(name, sport, mode, signUpDeadline);
-      tournaments.add(tournament);
-      ui.displayMsg("\nNew tournament has been registered!");
+                    ui.displayMsg("\nA team must have at least 2 players to get registered");
+                    ui.displayMsg("Please enter 2 or more players to complete registration");
+                    ui.displayMsg("Type -1 to end");
 
-      String willAddDateAndTimesNow = ui.getUserInput("\nWould you like to add match date and times now? (y/n):");
+                    ArrayList<String> playerNames = new ArrayList<String>();
+                    boolean stillAdding = true;
 
-      saveIdCounterData("src/data/idCounters/idCounter_Tournament.txt", "ID:" + Tournament.getIdCounter());
-      saveTournamentData("src/data/tournaments", name, tournament.toString());
-   }
+                    while(stillAdding){
+                        String playerName = ui.getUserInput("\nPlayer name: ");
 
-   public static void addMatchDateAndTimes(Tournament tournament){
+                        if(!playerName.equals("-1")){
+                            playerNames.add(playerName);
+                        }else{
+                            stillAdding = false;
+                        }
+                    }
 
-   }
+                    if(playerNames.size() == 0){
+                        ui.displayMsg("You need at least 2 players to register into the tournament");
+                        ui.displayMsg("\nThe team was not registered...");
+                    }else{
+                        Team team = new Team(teamName);
+                        tournamentToRegisterInto.addTeam(team);
 
-   public static void deleteTournament(){
-      ui.displayMsg("\n(DELETE TOURNAMENT)");
-      ui.displayMsg("\nTournaments currently in the system: ");
+                        for(String playerName : playerNames){
+                            team.addPlayer(playerName);
+                        }
 
-      if(tournaments.size() != 0){
-         displayAllTournaments();
-
-         String userInput = ui.getUserInput("\nType the id of the tournament you " +
-         "would like to delete: \nType -1 to cancel");
-
-         if(!userInput.equals("-1")){
-            int tournamentId = Integer.parseInt(userInput);
-
-            Tournament tournamentToBeDeleted = findTournament(tournamentId);
-
-            if(tournamentToBeDeleted != null){
-               File fileToBeDeleted = new File("src/data/tournaments/" + tournamentToBeDeleted.getName());
-               deleteFolder(fileToBeDeleted);
-
-               tournaments.remove(findTournament(tournamentId));
-
-               ui.displayMsg("\nThe tournament was successfully deleted.");
-            }else{
-               ui.displayMsg("\nNo tournament matching the provided id could be found in the system...");
+                        saveIdCounterData("src/data/idCounters/idCounter_Team.txt", "ID:" + Team.getIdCounter());
+                        saveData("src/data/tournaments/" + tournamentToRegisterInto.getName() + "/teamData.txt",
+                        team.toString());
+                        ui.displayMsg("\nThe team was successfully registered!");
+                    }
+                }else{
+                    ui.displayMsg("\nNo tournament matching the provided id could be found in the system...");
+                }
             }
-         }
-      }else{
-         ui.displayMsg("There are currently no tournaments registered in the system.");
-      }
-   }
+        }else{
+            ui.displayMsg("There are currently no tournaments registered in the system.");
+        }
+    }
 
-   public static void displayAllTournaments(){
-      for(Tournament tournament : tournaments){
-         System.out.println(tournament.getName() + " (ID: " + tournament.getId() + ")");
-      }
-   }
+    public static void printTournamentData(File file){
+        Scanner input = null;
+        try {
+            input = new Scanner(file);
 
-   public static Tournament findTournament(int id){
-      Tournament tournamentMatch = null;
+            while (input.hasNextLine())
+            {
+                System.out.println(input.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-      for(Tournament tournament : tournaments){
-         if(tournament.getId() == id){
-            tournamentMatch = tournament;
-            break;
-         }
-      }
+    /*public static void registerNewTeam(){
+        ui.displayMsg("\nRegister new team");
+        String name = ui.getUserInput("\n team name:");
+        String id = ui.getUserInput("\n team id:");
+        int inp = ui.getTeamInput();
+        Team team = new Team(name);//inp
 
-      return tournamentMatch;
-   }
-
+        teams.add(team);
+        ui.displayMsg("\nNew team has been registered!");
+        System.out.println(teams);
+        //saveData("src/tournamentData.txt", getTournamentData());
+    }*/
 }

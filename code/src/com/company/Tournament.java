@@ -1,11 +1,18 @@
 package com.company;
 
-import java.time.LocalDateTime;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Tournament {
+   final static UI ui = new UI();
    static final DateTimeFormatter myDateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
+   static final DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("dd-MM-yy");
    static private int idCounter;
 
    private int id;
@@ -13,7 +20,7 @@ public class Tournament {
    private String sport;
    private String tournamentMode;
    private LocalDateTime signUpDeadline;
-   private ArrayList<LocalDateTime> dateAndTimes = new ArrayList<LocalDateTime>();
+   private ArrayList<LocalDate> gameDates = new ArrayList<LocalDate>();
    private ArrayList<Team> teams = new ArrayList<Team>();
    private ArrayList<Match> matches = new ArrayList<Match>();
 
@@ -37,6 +44,8 @@ public class Tournament {
       this.signUpDeadline = LocalDateTime.parse(signUpDeadline, myDateTimeFormat);
    }
 
+
+// ******************** Getter and Setter-ish *******************
 
    public static int getIdCounter(){
       return idCounter;
@@ -82,22 +91,189 @@ public class Tournament {
       this.signUpDeadline = signUpDeadline;
    }
 
-   public ArrayList<LocalDateTime> getDateAndTimes(){
-      return dateAndTimes;
+   public ArrayList<LocalDate> getGameDates(){
+      return gameDates;
    }
 
-   public void addDateAndTimes(String dateAndTimeToAdd){
-      dateAndTimes.add(LocalDateTime.parse(dateAndTimeToAdd, myDateTimeFormat));
+   public void addGameDates(String dateToAdd){
+      gameDates.add(LocalDate.parse(dateToAdd, myDateFormat));
    }
 
    public ArrayList<Team> getTeams() {
       return teams;
    }
 
-   public void addTeam(String teamName){
-      Team team = new Team(teamName);
-      teams.add(new Team(name));
+   public void addTeam(Team team){
+      teams.add(team);
    }
+
+// ***************** Getter and Setter-ish END *******************
+
+
+// ********************** Static methods *************************
+
+   public static void readTournamentData(String filePath){
+   try{
+      File tournamentsDir = new File(filePath);
+      String tournamentsDirContent[] = tournamentsDir.list();
+
+      for(int i = 0; i<tournamentsDirContent.length; i++) {
+         File tournamentData = new File(filePath + "/" + tournamentsDirContent[i] + "/tournamentData.txt");
+         Scanner scanner = new Scanner(tournamentData);
+         String[] tournamentLine;
+
+         while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            tournamentLine = line.split(",");
+
+            int id = Integer.parseInt(tournamentLine[1]);
+            String name = tournamentLine[3];
+            String sport = tournamentLine[5];
+            String tournamentMode = tournamentLine[7];
+            String signUpDeadline = tournamentLine[9];
+
+            Main.tournaments.add(new Tournament(id, name, sport, tournamentMode, signUpDeadline));
+
+            // Adds dateAndTimes data to the corresponding tournament
+            readTournamentGameDateData(filePath, Main.tournaments.get(i));
+         }
+         scanner.close();
+      }
+   }catch(IOException e){
+      System.out.println(e);
+   }
+}
+
+   public static void readTournamentGameDateData(String filePath, Tournament tournament){
+      try{
+         File tournamentsDir = new File(filePath);
+         String tournamentsDirContent[] = tournamentsDir.list();
+
+         for(int i=0; i<tournamentsDirContent.length; i++) {
+            File gameDateData = new File(filePath + "/" + tournament.getName() + "/gameDateData.txt");
+            Scanner scanner = new Scanner(gameDateData);
+            String[] gameDateLines;
+
+            while(scanner.hasNextLine()) {
+               String line = scanner.nextLine();
+               gameDateLines = line.split(",");
+
+               for(String gameDateLine : gameDateLines){
+                  tournament.addGameDates(gameDateLine);
+               }
+            }
+            scanner.close();
+         }
+      }catch(IOException e){
+         System.out.println(e);
+      }
+   }
+
+   public static void saveTournamentData(String filePath, String fileName, String data){
+      String fileData = data;
+
+      try{
+         Main.createNewDir(filePath, fileName);
+
+         File file = new File(filePath + "/" + fileName + "/tournamentData.txt");
+         FileWriter fileWriter = new FileWriter(file, false);
+         fileWriter.write(data);
+         fileWriter.close();
+      }catch (IOException e){
+         System.out.println(e.getCause());
+      }
+   }
+
+   public static void registerNewTournament(){
+      ui.displayMsg("\n(REGISTER NEW TOURNAMENT)");
+
+      String name = ui.getUserInput("\nTournament name:");
+      String sport = ui.getUserInput("Sport:");
+      String mode = ui.getUserInput("Tournament mode (knock-out or group):");
+      String signUpDeadline = ui.getUserInput("Signup deadline (dd-MM-yy HH:mm):");
+
+      Tournament tournament = new Tournament(name, sport, mode, signUpDeadline);
+      Main.tournaments.add(tournament);
+      ui.displayMsg("\nNew tournament has been registered!");
+
+      Main.saveIdCounterData("src/data/idCounters/idCounter_Tournament.txt", "ID:" + Tournament.getIdCounter());
+      saveTournamentData("src/data/tournaments", name, tournament.toString());
+      Main.saveData("src/data/tournaments/" + name + "/gameDateData.txt", "");
+
+      String willAddDateAndTimesNow = ui.getUserInput("\nWould you like to add game dates now? (y/n):").toLowerCase();
+
+      if(willAddDateAndTimesNow.equals("y")){
+         ui.displayMsg("\n(ADD GAME DATE)");
+         ui.displayMsg("\nWrite the game date you would like to add to the tournament");
+         ui.displayMsg("Type -1 to end\n");
+         boolean stillAdding = true;
+
+         while(stillAdding){
+            String date = ui.getUserInput("Date (dd-MM-yy): ");
+
+            if(date.equals("-1")){
+               ui.displayMsg("\nAll game dates has now been saved");
+               stillAdding = false;
+               return;
+            }else{
+               tournament.addGameDates(date);
+               Main.saveData("src/data/tournaments/" + name + "/gameDateData.txt", date + "\n");
+            }
+         }
+      }
+   }
+
+   public static void displayAllTournaments(){
+      for(Tournament tournament : Main.tournaments){
+         System.out.println("- " + tournament.getName() + " (ID: " + tournament.getId() + ")");
+      }
+   }
+
+   public static Tournament findTournament(int id){
+      Tournament tournamentMatch = null;
+
+      for(Tournament tournament : Main.tournaments){
+         if(tournament.getId() == id){
+            tournamentMatch = tournament;
+            break;
+         }
+      }
+
+      return tournamentMatch;
+   }
+
+   public static void deleteTournament(){
+      ui.displayMsg("\n(DELETE TOURNAMENT)");
+      ui.displayMsg("\nTournaments currently in the system: ");
+
+      if(Main.tournaments.size() != 0){
+         displayAllTournaments();
+
+         String userInput = ui.getUserInput("\nType the ID of the tournament you " +
+         "would like to delete\nType -1 to cancel: ");
+
+         if(!userInput.equals("-1")){
+            int tournamentId = Integer.parseInt(userInput);
+
+            Tournament tournamentToBeDeleted = findTournament(tournamentId);
+
+            if(tournamentToBeDeleted != null){
+               File fileToBeDeleted = new File("src/data/tournaments/" + tournamentToBeDeleted.getName());
+               Main.deleteFolder(fileToBeDeleted);
+
+               Main.tournaments.remove(findTournament(tournamentId));
+
+               ui.displayMsg("\nThe tournament was successfully deleted!");
+            }else{
+               ui.displayMsg("\nNo tournament matching the provided id could be found in the system...");
+            }
+         }
+      }else{
+         ui.displayMsg("There are currently no tournaments registered in the system...");
+      }
+   }
+
+// ******************** Static methods END ***********************
 
 
    @Override
