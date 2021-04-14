@@ -107,6 +107,8 @@ public class Tournament {
 
    public void addTeam(Team team){
       teams.add(team);
+      if (teams.size() >6)
+         randomTeamsToMatch();
    }
 
 // ***************** Getter and Setter-ish END *******************
