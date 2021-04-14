@@ -401,7 +401,6 @@ public class Tournament {
       }catch (IOException e){
          System.out.println(e.getCause());
       }
-
    }
 
    @Override
