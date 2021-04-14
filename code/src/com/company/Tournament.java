@@ -396,7 +396,7 @@ public class Tournament {
 
    public void saveMatchesToFile(Match data){
       try{
-         File file = new File("src/data/matches.txt");
+         File file = new File("src/data/tournament/matches/matchesBetween.txt");
          System.out.println(file);
          FileWriter fr = new FileWriter(file, true);
          String myData = data.toString() + "\n";
