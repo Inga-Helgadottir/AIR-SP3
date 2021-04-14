@@ -124,7 +124,7 @@ public class Main {
         ui.displayMsg("\nWhat would you like to do?");
         ui.displayMsg("\n- Manage tournaments (Type: 1)");
         ui.displayMsg("- Register a new team to a tournament (Type: 2)");
-        ui.displayMsg("- See data\n (Type: 3)");
+        ui.displayMsg("- See data (Type: 3)");
         ui.displayMsg("- Close system (Type: 4)"); // Change if more menu options are added
     }
 
