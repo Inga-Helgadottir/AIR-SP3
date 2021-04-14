@@ -249,6 +249,59 @@ public class Main {
         }
     }
 
+    public static void showDataMenu()
+    {
+        ui.displayMsg(" See data" +
+                "\n" + " - Choose which data to view:" +
+                "\n" + " - Press 1 for Tournament overview" +
+                "\n" + " - Press 2 for Single game overview" +
+                "\n" + " - Press 3 for Team overview" +
+                "\n" + " - Press 4 for Timetable" +
+                "\n" + " - Press 5 to go back to start-menu");
+        String taskType = ui.getUserInput("\nUser input:");
+        handleDataMenuChoice(taskType);
+    }
+
+    public static void handleDataMenuChoice(String taskType)
+    {
+        if(taskType.equals("1")){ //done
+            ui.displayMsg("Displaying all tournaments: ");
+            Tournament.displayAllTournaments();
+
+        }else if(taskType.equals("2")){ //in progress
+            ui.displayMsg("Displaying matches: ");
+            // this needs to draw from matchData.txt
+
+            //Match.displayAllMatches();
+
+        }else if(taskType.equals("3")){ //in progress
+            ui.displayMsg("Displaying all teams: ");
+            Team.displayAllTeams();
+            //make a new menu choice, to show where a seperate team ranks in the standings
+            ui.displayMsg("Show team standings in tournaments? y/n");
+
+            if (taskType.equals("y")){ //in progress
+                ui.displayMsg("Team rankings: ");
+
+            }
+            else if(taskType.equals("n")){ //unfinished
+                return;
+
+            }
+        }else if(taskType.equals("4")){ //done
+            ui.displayMsg("Displaying timeslots: ");
+            //make a method which displays timeslots of the upcoming matches
+
+
+        }else if(taskType.equals("5")) {
+            return;
+
+        }else{
+            ui.displayMsg("Invalid input");
+
+        }
+    }
+
     /*public static void registerNewTeam(){
         ui.displayMsg("\nRegister new team");
         String name = ui.getUserInput("\n team name:");

@@ -72,6 +72,11 @@ public class Team {
       tournamentToJoin.addTeam(this);
    }
 
+   public static void displayAllTeams(){
+      for(Tournament tournament : Main.tournaments){
+         System.out.println(tournament.getTeams());
+      }
+   }
 
 //   @Override
 //   public String toString() {
