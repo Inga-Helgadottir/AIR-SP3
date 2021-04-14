@@ -302,6 +302,32 @@ public class Tournament {
       return tournamentMatch;
    }
 
+   public static void displayTeamRankings(Tournament tournament){
+      ArrayList<Team> rankings = new ArrayList<Team>();
+
+      for(Team team : tournament.getTeams()){
+         rankings.add(team);
+      }
+
+      int n = rankings.size();
+      for (int i = 0; i < n-1; i++)
+         for (int j = 0; j < n-i-1; j++)
+            if (rankings.get(j).getPoint() < rankings.get(j+1).getPoint())
+            {
+               // swap arr[j+1] and arr[j]
+               Team temp = rankings.get(j);
+               rankings.set(j, rankings.get(j+1));
+               rankings.set(j+1, temp);
+            }
+
+      int rankCounter = 1;
+
+      for(Team team : rankings){
+         System.out.println(rankCounter + ") " + team.getName() + ": " + team.getPoint() + " points");
+         rankCounter++;
+      }
+   }
+
    public static void deleteTournament(){
       ui.displayMsg("\n(DELETE TOURNAMENT)");
       ui.displayMsg("\nTournaments currently in the system: ");
