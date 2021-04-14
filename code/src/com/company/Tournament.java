@@ -328,6 +328,11 @@ public class Tournament {
       }
    }
 
+   public static ArrayList<LocalDate> showGameDates(Tournament tournament){
+      ArrayList<LocalDate> gameDates = tournament.gameDates;
+      return gameDates;
+   }
+
    public static void deleteTournament(){
       ui.displayMsg("\n(DELETE TOURNAMENT)");
       ui.displayMsg("\nTournaments currently in the system: ");
