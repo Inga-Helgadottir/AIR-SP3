@@ -3,6 +3,7 @@ package com.company;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Match {
@@ -77,5 +78,16 @@ public class Match {
 
     public void setTeam2Goals(int team2Goals) {
         this.team2Goals = team2Goals;
+    }
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "teams=" + Arrays.toString(teams) +
+                ", gameDate=" + gameDate +
+                ", team1Goals=" + team1Goals +
+                ", team2Goals=" + team2Goals +
+                ", winner='" + winner + '\'' +
+                '}';
     }
 }

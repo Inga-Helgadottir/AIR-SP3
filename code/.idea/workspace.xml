@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dbf621f-8f61-4331-afa2-41df8e069b0f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/data/matches/matchWinnerData.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/matches/matchesBetween.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code/com/company/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code/com/company/Tournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code/data/idCounters/idCounter_Team.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code/data/idCounters/idCounter_Team.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/code/data/idCounters/idCounter_Tournament.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/code/data/idCounters/idCounter_Tournament.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Match.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Tournament.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/idCounters/idCounter_Team.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/idCounters/idCounter_Team.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/idCounters/idCounter_Tournament.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/idCounters/idCounter_Tournament.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/tournaments/HelloWorld/gameDateData.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/tournaments/HelloWorld/teamData.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/tournaments/HelloWorld/tournamentData.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tournamentData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tournamentData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/tournaments/hhhhhhhh/gameDateData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/tournaments/hhhhhhhh/teamData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/tournaments/hhhhhhhh/tournamentData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/tournaments/ssssssss/gameDateData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/tournaments/ssssssss/teamData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/tournaments/ssssssss/tournamentData.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
