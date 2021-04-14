@@ -105,7 +105,6 @@ public class Tournament {
 
    public void addTeam(Team team){
       teams.add(team);
-      randomTeamsToMatch();
    }
 
 // ***************** Getter and Setter-ish END *******************
