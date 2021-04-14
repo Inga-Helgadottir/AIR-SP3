@@ -402,7 +402,6 @@ public void randomTeamsToMatch(){
    public void saveMatchesToFile(Match data){
       try{
          File file = new File("src/data/matches/matchesBetween.txt");
-         System.out.println(file.toString());
          FileWriter fr = new FileWriter(file, true);
          String myData = data.toString() + "\n";
          fr.write(myData);
