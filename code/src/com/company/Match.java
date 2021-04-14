@@ -39,9 +39,8 @@ public class Match {
     }
 
     public void updateGoalsFile(){
-        String fileData = "";
         try{
-            File file = new File("src/data/matchData.txt");
+            File file = new File("src/data/matches/matchWinnerData.txt");
             FileWriter fr = new FileWriter(file, true);
             String data = "team1, " + teams[0].getName() + ", team1goals, " + team1Goals + ", team2, " + teams[1].getName() + ", team2goals, " + team2Goals + ", Winner, " + this.winner + ",\n";
             fr.write(data);

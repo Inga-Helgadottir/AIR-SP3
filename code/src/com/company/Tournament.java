@@ -107,8 +107,9 @@ public class Tournament {
 
    public void addTeam(Team team){
       teams.add(team);
-      if (teams.size() >6)
+      if (teams.size() == 2) {//> 6
          randomTeamsToMatch();
+      }
    }
 
 // ***************** Getter and Setter-ish END *******************
@@ -370,6 +371,7 @@ public class Tournament {
 
 // ******************** Static methods END ***********************
 public void randomTeamsToMatch(){
+   System.out.println("1");
    int amountOfTeams = teams.size();
    ArrayList<Integer> randDone = new ArrayList<>();
    if(amountOfTeams < 2) {
@@ -398,9 +400,10 @@ public void randomTeamsToMatch(){
 }
 
    public void saveMatchesToFile(Match data){
+      System.out.println("2");
       try{
-         File file = new File("src/data/matches.txt");
-         System.out.println(file);
+         File file = new File("src/data/matches/matchesBetween.txt");
+         System.out.println(file.toString());
          FileWriter fr = new FileWriter(file, true);
          String myData = data.toString() + "\n";
          fr.write(myData);

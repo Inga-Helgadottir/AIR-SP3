@@ -1,0 +1,8 @@
+ID,4,Name,hhhhhhh,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,5,Name,ggggg,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,6,Name,sfdgfd,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,7,Name,gfdsgfsd,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,8,Name,dfs,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,9,Name,fsgd,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,10,Name,fdsggfdgfsd,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
+ID,11,Name,fgds,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
