@@ -82,12 +82,11 @@ public class Match {
 
     @Override
     public String toString() {
-        return "Match{" +
-                "teams=" + Arrays.toString(teams) +
+        return "Match" +
+                ", teams=" + Arrays.toString(teams) +
                 ", gameDate=" + gameDate +
                 ", team1Goals=" + team1Goals +
                 ", team2Goals=" + team2Goals +
-                ", winner='" + winner + '\'' +
-                '}';
+                ", winner='" + winner + '\n';
     }
 }
