@@ -118,6 +118,7 @@ public class Main {
             registerNewTeam();
         }else if(taskType.equals("3")){
             System.out.println("See data");
+            showDataMenu();
         }else if(taskType.equals("4")){
             Tournament.displayAllTournaments();
             String matchType = ui.getUserInput("\nWhich tournament would you like to send to matches:");
