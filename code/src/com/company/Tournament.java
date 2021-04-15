@@ -113,26 +113,22 @@ public class Tournament {
 
 // *********************** Other methods *************************
 
-   public void displayTeamRankings(){
+   public static void displayTeamRankings(Tournament tournament){
       ArrayList<Team> rankings = new ArrayList<Team>();
 
-      for(Team team : teams){
+      for(Team team : tournament.getTeams()){
          rankings.add(team);
       }
 
-//      Team teamWithHighestPoint = rankings.get(0);
-//
-//      for(int i = 0; i < rankings.size(); i++){
-//         for(int j = 1; j < (rankings.size() - i); j++){
-//            if(rankings.get(j-1).getPoint() > rankings.get(j).getPoint()){
-//               //swap elements
-//               teamWithHighestPoint = rankings.get(j-1);
-//               rankings.add(j-1, rankings.get(j));
-//               rankings.add(j, teamWithHighestPoint);
-//            }
-//
-//         }
-//      }
+      int n = rankings.size();
+      for (int i = 0; i < n-1; i++)
+         for (int j = 0; j < n-i-1; j++)
+            if (rankings.get(j).getPoint() < rankings.get(j+1).getPoint())
+            {
+               Team temp = rankings.get(j);
+               rankings.set(j, rankings.get(j+1));
+               rankings.set(j+1, temp);
+            }
 
       int rankCounter = 1;
 
