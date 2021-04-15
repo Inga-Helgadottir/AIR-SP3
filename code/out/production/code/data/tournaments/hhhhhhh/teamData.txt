@@ -1,2 +1,0 @@
-ID,24,Name,dffff,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
-ID,25,Name,fdas,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0

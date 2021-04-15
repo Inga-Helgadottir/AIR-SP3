@@ -14,6 +14,7 @@ public class Main {
 
     static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
     static boolean systemOn = true;
+    static Tournament t = new Tournament("to", "sd", "sfd", "11-11-21 13:30");
 
     public static void main(String[] args) throws IOException{
         //Read all id counters and set to corresponding classes
@@ -22,25 +23,6 @@ public class Main {
 
         //Read all tournament data
         Tournament.readTournamentData("src/data/tournaments");
-
-        /*testing
-            Team t1 = new Team("hoho");
-            Team t2 = new Team("ohoh");
-            Team[] teams = {t1, t2};
-            Match match = new Match(teams);
-            match.setTeam1Goals(12);
-            match.setTeam2Goals(13);
-            match.whoWon();
-        test ends*/
-
-        /*testing
-            System.out.println("Testing values");
-            System.out.println(tournaments.get(0).getName());
-            System.out.println(tournaments.get(0).getSport());
-            System.out.println(tournaments.get(0).toString());
-            System.out.println(tournaments.get(1).toString());
-            System.out.println("end of testing\n");
-         test ends*/
 
         ui.displayMsg("~ Tournament Manager ~");
 
@@ -125,7 +107,8 @@ public class Main {
         ui.displayMsg("\n- Manage tournaments (Type: 1)");
         ui.displayMsg("- Register a new team to a tournament (Type: 2)");
         ui.displayMsg("- See data (Type: 3)");
-        ui.displayMsg("- Close system (Type: 4)"); // Change if more menu options are added
+        ui.displayMsg("- Make matches (Type: 4)");
+        ui.displayMsg("- Close system (Type: 5)");
     }
 
     public static void handleStartMenuChoice(String taskType){
@@ -135,11 +118,41 @@ public class Main {
             registerNewTeam();
         }else if(taskType.equals("3")){
             System.out.println("See data");
-        }else if(taskType.equals("4")){ // Change if more menu options are added
+        }else if(taskType.equals("4")){
+            Tournament.displayAllTournaments();
+            String matchType = ui.getUserInput("\nWhich tournament would you like to send to matches:");
+            showMatchMenu(matchType);
+        }else if(taskType.equals("5")){
             System.out.println("\nThe system has been turned off");
             systemOn = false;
         }else{
             System.out.println("Invalid input");
+        }
+    }
+
+    public static void showMatchMenu(String matchType){
+        int tournamentId = Integer.parseInt(matchType);
+        Tournament matchTournament = Tournament.findTournament(tournamentId);
+        if(matchTournament != null){
+            File setTournamentToMatches = new File("src/data/tournaments/" + matchTournament.getName() + "/teamData.txt");
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(setTournamentToMatches);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (scanner != null) {
+                while (scanner.hasNextLine()) {
+                    String[] lines = scanner.nextLine().split(",");
+                    String name = lines[3];
+                    Team team1 = new Team(name);
+                    t.addTeam(team1);
+                }
+                t.randomTeamsToMatch();
+                System.out.println("The teams in your tournament have been sent to matches");
+            }
+        }else{
+            System.out.println("There is no tournament with that id");
         }
     }
 
@@ -158,7 +171,7 @@ public class Main {
 
     public static void handleTournamentChoice(String taskType){
         if(taskType.equals("1")){
-           Tournament.registerNewTournament();
+            Tournament.registerNewTournament();
         }else if(taskType.equals("2")){
             //todo Make tournament editing available
             ui.displayMsg("Editing option not yet available");
@@ -179,7 +192,7 @@ public class Main {
             Tournament.displayAllTournaments();
 
             String userInput = ui.getUserInput("\nType the ID of the tournament the team would like to register " +
-            "into \nType -1 to cancel: ");
+                    "into \nType -1 to cancel: ");
 
             if(!userInput.equals("-1")){
                 int tournamentId = Integer.parseInt(userInput);
@@ -219,7 +232,7 @@ public class Main {
 
                         saveIdCounterData("src/data/idCounters/idCounter_Team.txt", "ID:" + Team.getIdCounter());
                         saveData("src/data/tournaments/" + tournamentToRegisterInto.getName() + "/teamData.txt",
-                        team.toString());
+                                team.toString());
                         ui.displayMsg("\nThe team was successfully registered!");
                     }
                 }else{
@@ -297,17 +310,4 @@ public class Main {
 
         }
     }
-
-    /*public static void registerNewTeam(){
-        ui.displayMsg("\nRegister new team");
-        String name = ui.getUserInput("\n team name:");
-        String id = ui.getUserInput("\n team id:");
-        int inp = ui.getTeamInput();
-        Team team = new Team(name);//inp
-
-        teams.add(team);
-        ui.displayMsg("\nNew team has been registered!");
-        System.out.println(teams);
-        //saveData("src/tournamentData.txt", getTournamentData());
-    }*/
 }

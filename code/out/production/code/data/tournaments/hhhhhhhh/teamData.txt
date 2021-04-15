@@ -1,2 +1,0 @@
-ID,20,Name,ghjkghjk,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0
-ID,21,Name,ghjl,Still in tournament,true,Point,0,Goals made,0,Opposing team's goals,0

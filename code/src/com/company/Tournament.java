@@ -107,9 +107,6 @@ public class Tournament {
 
    public void addTeam(Team team){
       teams.add(team);
-      if (teams.size() > 1) {//> 6
-         randomTeamsToMatch();
-      }
    }
 
 // ***************** Getter and Setter-ish END *******************
@@ -152,37 +149,37 @@ public class Tournament {
 // ********************** Static methods *************************
 
    public static void readTournamentData(String filePath){
-   try{
-      File tournamentsDir = new File(filePath);
-      String tournamentsDirContent[] = tournamentsDir.list();
+      try{
+         File tournamentsDir = new File(filePath);
+         String tournamentsDirContent[] = tournamentsDir.list();
 
-      for(int i = 0; i<tournamentsDirContent.length; i++) {
-         File tournamentData = new File(filePath + "/" + tournamentsDirContent[i] + "/tournamentData.txt");
-         Scanner scanner = new Scanner(tournamentData);
-         String[] tournamentLine;
+         for(int i = 0; i<tournamentsDirContent.length; i++) {
+            File tournamentData = new File(filePath + "/" + tournamentsDirContent[i] + "/tournamentData.txt");
+            Scanner scanner = new Scanner(tournamentData);
+            String[] tournamentLine;
 
-         while(scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            tournamentLine = line.split(",");
+            while(scanner.hasNextLine()) {
+               String line = scanner.nextLine();
+               tournamentLine = line.split(",");
 
-            int id = Integer.parseInt(tournamentLine[1]);
-            String name = tournamentLine[3];
-            String sport = tournamentLine[5];
-            String tournamentMode = tournamentLine[7];
-            String signUpDeadline = tournamentLine[9];
+               int id = Integer.parseInt(tournamentLine[1]);
+               String name = tournamentLine[3];
+               String sport = tournamentLine[5];
+               String tournamentMode = tournamentLine[7];
+               String signUpDeadline = tournamentLine[9];
 
-            Main.tournaments.add(new Tournament(id, name, sport, tournamentMode, signUpDeadline));
+               Main.tournaments.add(new Tournament(id, name, sport, tournamentMode, signUpDeadline));
 
-            // Adds dateAndTimes data to the corresponding tournament
-            readTournamentGameDateData(filePath, Main.tournaments.get(i));
-            readTournamentTeamData(filePath, Main.tournaments.get(i));
+               // Adds dateAndTimes data to the corresponding tournament
+               readTournamentGameDateData(filePath, Main.tournaments.get(i));
+               readTournamentTeamData(filePath, Main.tournaments.get(i));
+            }
+            scanner.close();
          }
-         scanner.close();
+      }catch(IOException e){
+         System.out.println(e);
       }
-   }catch(IOException e){
-      System.out.println(e);
    }
-}
 
    public static void readTournamentGameDateData(String filePath, Tournament tournament){
       try{
@@ -346,7 +343,7 @@ public class Tournament {
          displayAllTournaments();
 
          String userInput = ui.getUserInput("\nType the ID of the tournament you " +
-         "would like to delete\nType -1 to cancel: ");
+                 "would like to delete\nType -1 to cancel: ");
 
          if(!userInput.equals("-1")){
             int tournamentId = Integer.parseInt(userInput);
@@ -369,35 +366,35 @@ public class Tournament {
       }
    }
 
-// ******************** Static methods END ***********************
-public void randomTeamsToMatch(){
-   int amountOfTeams = teams.size();
-   ArrayList<Integer> randDone = new ArrayList<>();
-   if(amountOfTeams < 2) {
-      System.out.println("You need at least 2 teams to start a match");
-   }else if(amountOfTeams % 2 != 0){
-      System.out.println("You have an uneven number of teams");
-   }else if(amountOfTeams == 2){
-      Team[] matchTeams = {teams.get(0), teams.get(1)};
-      Match m = new Match(matchTeams);
-      saveMatchesToFile(m);
-   }else{
-      Random rand = new Random();
-      while(randDone.size() < amountOfTeams){
-         int r1 = rand.nextInt(amountOfTeams - 0) + 0;
-         int r2 = rand.nextInt(amountOfTeams - 0) + 0;
-         boolean result = randDone.contains(r1);
-         boolean result2 = randDone.contains(r2);
-         if(result == false && result2 == false && r2 != r1){
-            randDone.add(r1);
-            randDone.add(r2);
-            Team[] matchTeams = {teams.get(r1), teams.get(r2)};
-            Match m = new Match(matchTeams);
-            saveMatchesToFile(m);
+   // ******************** Static methods END ***********************
+   public void randomTeamsToMatch(){
+      int amountOfTeams = teams.size();
+      ArrayList<Integer> randDone = new ArrayList<>();
+      if(amountOfTeams < 2) {
+         System.out.println("You need at least 2 teams to start a match");
+      }else if(amountOfTeams % 2 != 0){
+         System.out.println("You have an uneven number of teams");
+      }else if(amountOfTeams == 2){
+         Team[] matchTeams = {teams.get(0), teams.get(1)};
+         Match m = new Match(matchTeams);
+         saveMatchesToFile(m);
+      }else{
+         Random rand = new Random();
+         while(randDone.size() < amountOfTeams){
+            int r1 = rand.nextInt(amountOfTeams - 0) + 0;
+            int r2 = rand.nextInt(amountOfTeams - 0) + 0;
+            boolean result = randDone.contains(r1);
+            boolean result2 = randDone.contains(r2);
+            if(result == false && result2 == false && r2 != r1){
+               randDone.add(r1);
+               randDone.add(r2);
+               Team[] matchTeams = {teams.get(r1), teams.get(r2)};
+               Match m = new Match(matchTeams);
+               saveMatchesToFile(m);
+            }
          }
       }
    }
-}
 
    public void saveMatchesToFile(Match data){
       try{
@@ -415,11 +412,11 @@ public void randomTeamsToMatch(){
    @Override
    public String toString(){
       return
-      "ID," + this.id + "," +
-      "Name," + this.name + "," +
-      "Sport," + this.sport + "," +
-      "Tournament mode," + this.tournamentMode + "," +
-      "SignUp deadline," + this.signUpDeadline.format(myDateTimeFormat);
+              "ID," + this.id + "," +
+                      "Name," + this.name + "," +
+                      "Sport," + this.sport + "," +
+                      "Tournament mode," + this.tournamentMode + "," +
+                      "SignUp deadline," + this.signUpDeadline.format(myDateTimeFormat);
    }
 
 }

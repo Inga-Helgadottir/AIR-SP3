@@ -78,19 +78,6 @@ public class Team {
       }
    }
 
-//   @Override
-//   public String toString() {
-//      return "Team{" +
-//              "id=" + id +
-//              ", name='" + name + '\'' +
-//              ", players=" + players +
-//              ", stillInTournament=" + stillInTournament +
-//              ", point=" + point +
-//              ", goalsMade=" + goalsMade +
-//              ", opposingTeamsGoals=" + opposingTeamsGoals +
-//              '}';
-//   }
-
    @Override
    public String toString() {
       return
